@@ -7,14 +7,14 @@ entry_points:
     parameters:
       data_file: /data/Sarcasm_Headlines_Dataset_v2.json
     command: "python3 /src/prepare_data.py --path {data_file}"
-    
+
   train:
     parameters:
       data_file: /data/Sarcasm_Headlines_Dataset_v2.json
-      learning_rate: float
+      learning_rate: 0.2
     command: "python3 /src/model/train.py --path {data_file} --lr {learning_rate}"
 
-  predict:  # новая точка входа для предсказаний
+  predict:
     parameters:
-      input_data: /data/Sarcasm_Headlines_Dataset_v2.json/data/Sarcasm_Headlines_Dataset.json  # параметр для пути к данным для прогнозирования
-    command: "python3 /src/model/predict.py --input_path {input_data}"  # Команда для выполнения прогнозирования
+      input_data: /data/Sarcasm_Headlines_Dataset_v2.json/data/Sarcasm_Headlines_Dataset.json
+    command: "python3 /src/model/predict.py --input_path {input_data}"

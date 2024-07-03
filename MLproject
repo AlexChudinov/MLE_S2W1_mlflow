@@ -5,16 +5,17 @@ python_env: /python_venv.yaml
 entry_points:
   prepair_data:
     parameters:
-      data_file: /data/Sarcasm_Headlines_Dataset_v2.json
+      data_file_in: /data/Sarcasm_Headlines_Dataset_v2.json
+      data_file_out: /data/result/sarcasm_clear.csv
     command: "python3 /src/prepare_data.py --path {data_file}"
 
-  train:
+  train_baseline:
     parameters:
-      data_file: /data/Sarcasm_Headlines_Dataset_v2.json
+      data_file: /data/result/sarcasm_clear.csv
       learning_rate: 0.2
     command: "python3 /src/model/train.py --path {data_file} --lr {learning_rate}"
 
-  predict:
+  search_hyper_params:
     parameters:
-      input_data: /data/Sarcasm_Headlines_Dataset_v2.json/data/Sarcasm_Headlines_Dataset.json
-    command: "python3 /src/model/predict.py --input_path {input_data}"
+      data_file: /data/result/sarcasm_clear.csv
+      n_trials: 10

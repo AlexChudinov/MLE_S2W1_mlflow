@@ -1,21 +1,21 @@
 name: S2W2_practicum
 
-python_env: /python_venv.yaml
+python_env: ./python_env.yaml
 
 entry_points:
-  prepair_data:
+  optuna:
     parameters:
-      data_file_in: /data/Sarcasm_Headlines_Dataset_v2.json
-      data_file_out: /data/result/sarcasm_clear.csv
-    command: "python3 /src/prepare_data.py --path {data_file}"
+      n_trials: {type: int, default: 1}
+    command: "python3 src/optuna_optimize.py --n_trials {n_trials}"
 
-  train_baseline:
+  prepare_data:
     parameters:
-      data_file: /data/result/sarcasm_clear.csv
-      learning_rate: 0.2
-    command: "python3 /src/model/train.py --path {data_file} --lr {learning_rate}"
-
-  search_hyper_params:
+      path_file: {type: str, default: "./data/Sarcasm_Headlines_Dataset_v2.json"}
+      lemmatize: {type: bool, default: False}
+      table_name: {type: str, default: "sarcasm_via"}
+    command: "python3 src/prepare_data.py --path {path_file}"
+    
+  baseline:
     parameters:
-      data_file: /data/result/sarcasm_clear.csv
-      n_trials: 10
+      table_name: {type: str, default: "sarcasm_via"}
+    command: "python3 src/baseline_model.py --table_name {table_name}"

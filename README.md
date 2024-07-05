@@ -118,7 +118,7 @@ pip install -r requirements_2.txt --no-deps
 ~~~
 import mlflow
 from pyspark.sql.functions import struct, col
-logged_model = 'runs:/e1785754ad8b46f7ba7cb722d1add4d1/via_models'
+logged_model = 'runs:/<experimant_id>/<model_path>'
 
 # Load model as a Spark UDF. Override result_type if the model does not return double values.
 loaded_model = mlflow.pyfunc.spark_udf(spark, model_uri=logged_model, result_type='double')
@@ -131,7 +131,7 @@ df.withColumn('predictions', loaded_model(struct(*map(col, df.columns))))
 
 ~~~
 import mlflow
-logged_model = 'runs:/e1785754ad8b46f7ba7cb722d1add4d1/via_models'
+logged_model = 'runs:/<experimant_id>/<model_path>'
 
 # Load model as a PyFuncModel.
 loaded_model = mlflow.pyfunc.load_model(logged_model)

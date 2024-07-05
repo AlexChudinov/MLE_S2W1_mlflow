@@ -63,6 +63,7 @@ def _create_engine(source: str):
 
 def setup_env():
     load_dotenv()
+    #REGION: Это не обязательная часть, которую при вызове `load_dotenv()` можно не делать
     os.environ["MLFLOW_S3_ENDPOINT_URL"] = "https://storage.yandexcloud.net"
     os.environ["AWS_BUCKET_NAME"] = str(os.environ.get('S3_BUCKET_NAME'))
     os.environ["AWS_ACCESS_KEY_ID"] = str(os.environ.get('AWS_ACCESS_KEY_ID'))
@@ -78,6 +79,7 @@ def setup_env():
     os.environ["REGISTRY_MODEL_NAME"]  = str(os.environ.get('REGISTRY_MODEL_NAME'))
     os.environ["RUN_NAME"]  = str(os.environ.get('RUN_NAME'))
     os.environ['SOURCE_TABLE_NAME'] = str(os.environ.get('SOURCE_TABLE_NAME'))
+    #ENDREGION
 
     mlflow.set_tracking_uri(f"http://{os.environ.get('MLFLOW_SERVER_HOST')}:{os.environ.get('MLFLOW_SERVER_PORT')}")
     mlflow.set_registry_uri(f"http://{os.environ.get('MLFLOW_SERVER_HOST')}:{os.environ.get('MLFLOW_SERVER_PORT')}")

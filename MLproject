@@ -7,15 +7,3 @@ entry_points:
     parameters:
       n_trials: {type: int, default: 1}
     command: "python3 src/optuna_optimize.py --n_trials {n_trials}"
-
-  prepare_data:
-    parameters:
-      path_file: {type: str, default: "./data/Sarcasm_Headlines_Dataset_v2.json"}
-      lemmatize: {type: bool, default: False}
-      table_name: {type: str, default: "sarcasm_via"}
-    command: "python3 src/prepare_data.py --path {path_file}"
-    
-  baseline:
-    parameters:
-      table_name: {type: str, default: "sarcasm_via"}
-    command: "python3 src/baseline_model.py --table_name {table_name}"
